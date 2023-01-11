@@ -1,0 +1,11 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "database": "/home/ale/Desktop/Ale/areweleetcodeyet/areweleetcodeyet.sqlite3",
+      "name": "areweeleetcodeyt"
+    }
+  ],
+  "sqltools.useNodeRuntime": true
+}
