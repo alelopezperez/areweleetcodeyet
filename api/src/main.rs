@@ -1,16 +1,15 @@
 #[macro_use]
 extern crate rocket;
-use models::Problem;
-use rocket::serde::json::Json;
 mod leetcode_service;
 mod models;
 mod schema;
-use crate::leetcode_service::*;
+use models::Problem;
+use rocket::serde::json::Json;
 
 #[get("/all-problems")]
 fn get_all_problems() -> Json<Vec<Problem>> {
-    let conn = &mut establish_connection();
-    Json(get_all(conn))
+    let conn = &mut leetcode_service::establish_connection();
+    Json(leetcode_service::get_all(conn))
 }
 
 #[launch]
