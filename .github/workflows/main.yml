@@ -34,9 +34,6 @@ jobs:
   Deploy:
     needs: Build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./website-astro
     steps:
       - uses: actions/checkout@v3
       - uses: jakejarvis/s3-sync-action@master
@@ -46,7 +43,7 @@ jobs:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: 'dist'
+          SOURCE_DIR: 'website-astro/dist'
       
     
       
