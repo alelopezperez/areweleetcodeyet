@@ -30,13 +30,10 @@ jobs:
     - name: Building Astro Website
       run: yarn build
     - name: Deploying
-      uses: kersvers/s3-sync-with-cloudfront-invalidation@v1.0.0
+      uses: ItsKarma/aws-cli@v1.70.0
       with:
-        args: --acl public-read --follow-symlinks --delete
+        args: s3 sync --delete --acl public-read website-astro/dist/ s3://${{ secrets.AWS_S3_BUCKET }}/
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-        DISTRIBUTION_ID: ${{ secrets.AWS_S3_CDN }}
-        SOURCE_DIR: 'website-astro/dist'
-        DEST_DIR: '/'
+        AWS_DEFAULT_REGION: "us-east-1"
