@@ -36,10 +36,18 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     - name: Upload
-      run: aws s3 sync --delete ./dist s3://www.areweleetcodeyet.com
-    - name: Invalidate
+      env:
+        AWS3: ${{ secrets.AWS_S3_CDN }}
+      run: aws s3 sync --delete ./dist s3://$AWS3
+    - name: Invalidate1
       env: # Or as an environment variable
         Dist1: ${{ secrets.AWS_DIST_1 }}
+      run: aws cloudfront create-invalidation --distribution-id $Dist1 --paths "/**/*"      
+    - name: Invalidate2
+      env: # Or as an environment variable
+        Dist2: ${{ secrets.AWS_DIST_2 }}
       run: aws cloudfront create-invalidation --distribution-id $Dist1 --paths "/**/*"
+        
+    
      
 
