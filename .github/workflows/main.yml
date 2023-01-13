@@ -36,5 +36,5 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     - name: Upload
-      run: aws s3 sync ./website-astro/dist s3://www.areweleetcodeyet.com
+      run: aws s3 sync ./dist s3://www.areweleetcodeyet.com
 
