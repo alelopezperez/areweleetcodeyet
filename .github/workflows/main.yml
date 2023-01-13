@@ -46,7 +46,7 @@ jobs:
     - name: Invalidate2
       env: # Or as an environment variable
         Dist2: ${{ secrets.AWS_DIST_2 }}
-      run: aws cloudfront create-invalidation --distribution-id $Dist1 --paths "/**/*"
+      run: aws cloudfront create-invalidation --distribution-id $Dist2 --paths "/**/*"
         
     
      
