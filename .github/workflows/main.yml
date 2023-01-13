@@ -28,7 +28,7 @@ jobs:
     - name: Install dependencies
       run: yarn --frozen-lockfile      
     - name: Building
-      run: yarn website-astro/ build
+      run: yarn build
     - name: cat dist
       run: cat favicon.svg
 
