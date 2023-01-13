@@ -1,0 +1,34 @@
+name: Build & deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - website-astro/**      
+  pull_request:
+    branches:
+      - main      
+    paths:
+      - website-astro/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        check-latest: true
+    - name: Change to Astro Pojects
+      run: cd website-astro/
+    - name: Install dependencies
+      run: yarn --frozen-lockfile      
+    - name: Building
+      run: yarn website-astro/ build
+    - name: cat dist
+      run: cat favicon.svg
+
