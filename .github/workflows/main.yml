@@ -28,7 +28,7 @@ jobs:
     - name: Install dependencies
       run: yarn --frozen-lockfile      
     - name: Building Astro Website
-      run: yarn build
+      run: yarn build && ls
     - name: Deploying    
       uses: aws-actions/configure-aws-credentials@v1
       with:
