@@ -6,7 +6,7 @@ mod schema;
 use models::Problem;
 use rocket::serde::json::Json;
 
-#[get("/all-problems")]
+#[get("/api/v1/all-problems")]
 fn get_all_problems() -> Json<Vec<Problem>> {
     let conn = &mut leetcode_service::establish_connection();
     Json(leetcode_service::get_all(conn))
