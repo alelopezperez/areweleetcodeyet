@@ -2,7 +2,7 @@
 
 diesel::table! {
     problems (id) {
-        id -> Nullable<Integer>,
+        id -> Int4,
         problem_name -> Text,
         url -> Text,
         has_rust -> Bool,
