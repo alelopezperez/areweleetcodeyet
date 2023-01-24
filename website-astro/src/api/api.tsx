@@ -7,7 +7,7 @@ export type ProblemLeetcode = {
 
 export const getAllProblems = async () => {
   return (await (
-    await fetch('http://localhost/api/v1/all-problems', {
+    await fetch('https://api.areweleetcodeyet.com/api/v1/all-problems', {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
