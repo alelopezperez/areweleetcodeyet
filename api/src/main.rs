@@ -5,6 +5,8 @@ mod models;
 mod schema;
 use models::Problem;
 use rocket::serde::json::Json;
+#[macro_use]
+extern crate diesel;
 
 #[get("/api/v1/all-problems")]
 fn get_all_problems() -> Json<Vec<Problem>> {

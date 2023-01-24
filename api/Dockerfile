@@ -1,12 +1,17 @@
 FROM rust:latest AS builder
-RUN apt-get update && apt-get -y install ca-certificates cmake musl-tools libssl-dev && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y musl-tools musl-dev
+RUN update-ca-certificates
+ENV TARGET x86_64-unknown-linux-musl
+RUN rustup default nightly
 COPY . .
-RUN rustup default nightly && rustup update
-RUN rustup target add x86_64-unknown-linux-musl
-RUN cargo build --target x86_64-unknown-linux-musl --release
+RUN rustup update
+RUN rustc --version
+RUN rustup target add "$TARGET"
+RUN cargo build --release
 
-FROM scratch
+FROM debian:buster-slim
+RUN apt update && apt install -y libpq-dev
 ENV ROCKET_ADDRESS=0.0.0.0
 EXPOSE 8000
-COPY --from=builder /target/x86_64-unknown-linux-musl/release/api .
+COPY --from=builder /target/release/api .
 CMD ["/api"]
