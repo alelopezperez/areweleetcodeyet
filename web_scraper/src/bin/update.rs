@@ -13,7 +13,7 @@ async fn main() {
 
     println!("last page in leetcode {} num : {}", page_num_100, last_id);
     let mut caps = DesiredCapabilities::chrome();
-    // caps.set_headless().unwrap();
+    caps.set_headless().unwrap();
     let mut driver = WebDriver::new("http://localhost:9515", caps).await.unwrap();
 
     driver
