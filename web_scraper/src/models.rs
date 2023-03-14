@@ -1,7 +1,8 @@
 use crate::schema::problems;
 use diesel::prelude::*;
+use serde::Serialize;
 
-#[derive(Queryable)]
+#[derive(Queryable, Serialize, Debug)]
 pub struct Problems {
     pub id: i32,
     pub problem_name: String,

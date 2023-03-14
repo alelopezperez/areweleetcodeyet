@@ -2,6 +2,7 @@
 name = "web_scraper"
 version = "0.1.0"
 edition = "2021"
+default-run = "web_scraper"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -12,4 +13,4 @@ thirtyfour = "0.31.0"
 tokio = "1.22.0"
 diesel = { version = "2.0.0", features = ["postgres"] }
 dotenvy = "0.15"
-
+serde = { version = "1.0.152", features = ["derive"] }

@@ -6,6 +6,7 @@ use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use dotenvy::dotenv;
 use schema::problems::problem_name;
+
 use std::env;
 
 pub fn establish_connection() -> PgConnection {
@@ -21,7 +22,7 @@ pub fn create_problem(conn: &mut PgConnection, p: &str, url: &str, has_rust: &bo
 
     let new_post = NewProblem {
         problem_name: p,
-        url,
+        url: url,
         has_rust,
     };
 
@@ -29,4 +30,16 @@ pub fn create_problem(conn: &mut PgConnection, p: &str, url: &str, has_rust: &bo
         .values(&new_post)
         .get_result(conn)
         .expect("msg")
+}
+
+pub fn get_last_problem(conn: &mut PgConnection) -> Problems {
+    use schema::problems::dsl::*;
+
+    let mut res = problems
+        .limit(1)
+        .order(id.desc())
+        .load::<Problems>(conn)
+        .expect("Error Fetching");
+
+    res.swap_remove(0)
 }
