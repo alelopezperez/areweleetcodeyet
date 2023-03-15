@@ -43,3 +43,14 @@ pub fn get_last_problem(conn: &mut PgConnection) -> Problems {
 
     res.swap_remove(0)
 }
+
+pub fn get_false_problems(conn: &mut PgConnection) -> Vec<Problems> {
+    use schema::problems::dsl::*;
+
+    let res = problems
+        .filter(has_rust.eq(true))
+        .load::<Problems>(conn)
+        .expect("Error Fetching");
+
+    res
+}
