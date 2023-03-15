@@ -1,8 +1,5 @@
-use diesel::prelude::*;
-use std::{thread, time::Duration, time::SystemTime};
-use thirtyfour::{extensions::query::conditions, prelude::*};
-use tokio::task::JoinHandle;
-use web_scraper::{create_problem, get_last_problem, models};
+use std::time::SystemTime;
+use thirtyfour::prelude::*;
 use web_scraper::{establish_connection, get_false_problems, update_problem};
 
 #[tokio::main]
@@ -74,8 +71,6 @@ async fn has_rust(ids: i32, link: String) {
             break;
         }
     }
-
-    use web_scraper::schema::problems::dsl::*;
 
     let connection = &mut establish_connection();
 
