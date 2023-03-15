@@ -48,9 +48,19 @@ pub fn get_false_problems(conn: &mut PgConnection) -> Vec<Problems> {
     use schema::problems::dsl::*;
 
     let res = problems
-        .filter(has_rust.eq(true))
+        .filter(has_rust.eq(false))
         .load::<Problems>(conn)
         .expect("Error Fetching");
 
     res
+}
+
+pub fn update_problem(conn: &mut PgConnection, ids: i32) {
+    use schema::problems::dsl::*;
+    diesel::update(problems.find(ids))
+        .set(has_rust.eq(true))
+        .get_result::<Problems>(conn)
+        .expect("somthing");
+
+    println!("problem with id{} updated to true", ids);
 }
